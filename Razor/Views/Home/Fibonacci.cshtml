@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Fibonacci";
+}
+
+<h1>Fibonacci</h1>
+
+@{
+    int nummer1 = 0, nummer2 = 1, nummer3, aantalElementen = 15;
+}
+
+<h3>Fibonacci nummers met 15 elementen</h3>
+
+<p>@nummer1 </p>
+<p>@nummer2 </p>
+
+@for(var i = 2; i<aantalElementen; i++){
+    nummer3 = nummer1 + nummer2;
+    <p>@nummer3 </p>
+    nummer1 = nummer2;
+    nummer2 = nummer3;
+}
