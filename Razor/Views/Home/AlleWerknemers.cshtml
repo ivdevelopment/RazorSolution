@@ -1,0 +1,12 @@
+﻿@*@using Razor.Models - in _viewimports.cshtml*@
+@model List<Werknemer>
+
+<h2>Alle werknemers</h2>
+@if (Model != null){
+    <ul>
+        @foreach (var werknemer in Model)
+        {
+            <li>@werknemer.Voornaam verdient €@werknemer.Wedde</li>
+        }
+    </ul>
+}

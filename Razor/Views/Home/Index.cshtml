@@ -1,29 +1,8 @@
-﻿@*@for (var teller = 0; teller < 10; teller++)
-{
-    <p>@teller</p>
-}*@
-
-@*Dit is commentaar
-
-het '@' teken moet je 2 keer na elkaar typen als je deze wilt gebruiken voor bv. een email*@
-
-<h1>1 + 5 * 3 - 4 = @(1+5*3-4)</h1>
-<br />
-<h2>Countdown</h2>
-@{
-    var getal = 10;
-    while (getal > 0){
-        <p>@getal</p>
-        getal--;
-    }
+﻿@model Razor.Models.Persoon
+@*Doorgegeven persoon : @Model?.Voornaam @Model?.Familienaam*@
+@if (Model != null){
+    @:Doorgeven persoon : @Model.Voornaam @Model.Familienaam
 }
-
-@if (new Random().Next(1,11) == 7){
-    @*Voor letterlijke test kan je onderstaande vb gebruiken*@
-    <text>Het is zeven.</text>
-    @*of*@
-    @: Je hebt geluk @*Dit is het kortst en gemakkelijkst*@
-} else{
-    <text>Het is geen zeven.</text>
-    @: andere keer misschien
+else{
+    @: Er werd geen data doorgegeven.
 }
