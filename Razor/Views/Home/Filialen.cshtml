@@ -1,0 +1,14 @@
+﻿@model List<Filiaal>
+<h2>Filialen</h2>
+@if (Model != null)
+{
+        <ul>
+            @foreach (var filiaal in Model)
+            {
+                <li>@filiaal.ID. @filiaal.Naam @Html.DisplayFor(m=>filiaal.Gebouwd)
+                        @Html.DisplayFor(m=>filiaal.Waarde)
+                        @Html.DisplayFor(m=>filiaal.Eigenaar)
+                </li>
+            }
+        </ul>
+}

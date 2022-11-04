@@ -1,4 +1,8 @@
-﻿@model Razor.Models.Persoon
+﻿@{
+    Layout = "~/Views/Shared/_AndereLayout.cshtml";
+}
+
+@model Razor.Models.Persoon
 @*Doorgegeven persoon : @Model?.Voornaam @Model?.Familienaam*@
 @if (Model != null){
     @:Doorgeven persoon : @Model.Voornaam @Model.Familienaam
