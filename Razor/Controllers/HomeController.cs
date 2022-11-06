@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Razor.Models;
+using Razor.Services;
 using System.Diagnostics;
 
 namespace Razor.Controllers
@@ -7,10 +9,12 @@ namespace Razor.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly FiliaalService _filiaalService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, FiliaalService filiaalService)
         {
             _logger = logger;
+            _filiaalService = filiaalService;
         }
 
         public IActionResult Index()
@@ -28,15 +32,36 @@ namespace Razor.Controllers
                 Gemeente = "Brussel"
             };
             ViewBag.deHoofdzetel = deHoofdzetel;
-            List<Filiaal> deFilialen = new()
+            var recentVerwijderdFiliaal = (string?)this.TempData["filiaal"];
+            if (recentVerwijderdFiliaal != null)
+                ViewBag.recenteVerwijdering = JsonConvert.DeserializeObject<Filiaal?>(recentVerwijderdFiliaal)?.Naam;
+            return View(_filiaalService.FindAll());
+        }
+        public IActionResult Verwijderd()
+        {
+            var tempdata = (string?)this.TempData.Peek("filiaal");
+            if (tempdata != null)
             {
-                new Filiaal {ID = 1, Naam = "Antwerpen", Gebouwd = new DateTime(2003, 1, 1), Waarde = 2000000, Eigenaar = Eigenaar.Gehuurd},
-                new Filiaal {ID = 2, Naam = "Wondelgem", Gebouwd = new DateTime(1979, 1, 1), Waarde = 2500000, Eigenaar = Eigenaar.Eigendom},
-                new Filiaal {ID = 3, Naam = "Haasrode", Gebouwd = new DateTime(1976, 1, 1), Waarde = 1000000, Eigenaar = Eigenaar.Gehuurd},
-                new Filiaal {ID = 4, Naam = "Wevelgem", Gebouwd = new DateTime(1981, 1, 1), Waarde = 1600000, Eigenaar = Eigenaar.Eigendom},
-                new Filiaal {ID = 5, Naam = "Genk", Gebouwd = new DateTime(1990, 1, 1), Waarde = 4000000, Eigenaar = Eigenaar.Gehuurd}
-            };
-            return View(deFilialen);
+                Filiaal? filiaal = JsonConvert.DeserializeObject<Filiaal?>(tempdata);
+                return View(filiaal);
+            }
+            else
+                return Redirect("~/home/vestigingen");
+        }
+        public IActionResult Verwijderen(int id)
+        {
+            var filiaal = _filiaalService.Read(id);
+            if (filiaal == null)
+                ViewBag.filiaalnummer = id;
+            return View(filiaal);
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var filiaal = _filiaalService.Read(id);
+            this.TempData["filiaal"] = JsonConvert.SerializeObject(filiaal);
+            _filiaalService.Delete(id);
+            return RedirectToAction(nameof(Verwijderd));
         }
 
         // Werknemer

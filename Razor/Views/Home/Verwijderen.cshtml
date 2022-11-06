@@ -1,0 +1,17 @@
+﻿
+@model Filiaal?
+
+@{
+    ViewBag.Title = "Verwijderen";
+}
+@if (Model is null){
+    <h2>Er bestaat geen filiaal met nummer @ViewBag.filiaalnummer.</h2>
+    <h3>Terug naar de <a href="~/home/vestigingen">lijst</a></h3>
+}
+else{
+    <h2>@Model.Naam verwijderen?</h2>
+    <form method="post" action="~/home/delete/@Model.ID">
+        <input type="submit" value="delete" />
+    </form>
+}
+

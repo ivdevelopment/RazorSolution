@@ -2,13 +2,14 @@
 <h2>Filialen</h2>
 @if (Model != null)
 {
-        <ul>
-            @foreach (var filiaal in Model)
-            {
-                <li>@filiaal.ID. @filiaal.Naam @Html.DisplayFor(m=>filiaal.Gebouwd)
-                        @Html.DisplayFor(m=>filiaal.Waarde)
-                        @Html.DisplayFor(m=>filiaal.Eigenaar)
-                </li>
-            }
-        </ul>
+            <ul>
+        @foreach (var filiaal in Model)
+        {
+            <li>@filiaal.ID. @filiaal.Naam @Html.DisplayFor(m=>filiaal.Gebouwd)
+                @Html.DisplayFor(m=>filiaal.Waarde)
+                @Html.DisplayFor(m=>filiaal.Eigenaar)
+                <a asp-action="Verwijderen" asp-route-id="@filiaal.ID"><img src="~/images/delete.png" alt="delete"/></a>
+                        </li>
+        }
+            </ul>
 }
