@@ -1,0 +1,14 @@
+﻿@model Persoon?
+@if (Model is null){
+    ViewBag.Title = "Persoon verwijderen";
+    <h2>Er bestaat geen persoon met ID @ViewBag.id</h2>
+    <h3>Terug naar de <a asp-action="Index">lijst</a></h3>
+}
+else{
+    ViewBag.Title = Model.Voornaam + ' ' + Model.Familienaam + " verwijderen";
+    <h2>@Model.Voornaam @Model.Familienaam verwijderen?</h2>
+    <form method="post" asp-action="Verwijderen" asp-route-id="@Model.ID">
+        <input type="submit" value="Verwijderen">
+    </form>
+}
+

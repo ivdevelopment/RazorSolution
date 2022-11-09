@@ -3,6 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddSessionStateTempDataProvider();
 builder.Services.AddSingleton<Razor.Services.FiliaalService>();
+builder.Services.AddSingleton<Razor.Services.PersoonService>();
 builder.Services.AddSession();
 
 var app = builder.Build();

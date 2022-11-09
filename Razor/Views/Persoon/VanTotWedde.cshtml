@@ -1,0 +1,25 @@
+﻿@model VanTotWeddeViewModel
+@{
+    ViewData["Title"] = "VanTotWedde";
+}
+
+<h2>Weddes tussen twee grenzen</h2>
+<form asp-action="VanTotWeddeResultaat" method="get">
+    <label asp-for="VanWedde"></label>
+    <span asp-validation-for="VanWedde">*</span>
+    <input asp-for="VanWedde" />
+    <label asp-for="TotWedde"></label>
+    <span asp-validation-for="TotWedde">*</span>
+    <input asp-for="TotWedde" />
+    <input type="submit" value="Zoeken" />
+    <div asp-validation-summary="All">Er zijn validatiefouten</div>
+</form>
+
+@if (Model?.Personen != null){
+    <ul>
+        @foreach(var persoon in Model.Personen){
+            <li>@persoon.Voornaam @persoon.Familienaam @persoon.Wedde</li>
+        }
+    </ul>
+}
+
