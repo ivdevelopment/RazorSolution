@@ -37,7 +37,7 @@ namespace Razor.Models
 
 
         [DataType(DataType.Date)]
-        [Verleden(ErrorMessage="Gebooàrtedatum moet in het verleden liggen")]
+        [Verleden(ErrorMessage="Geboortedatum moet in het verleden liggen")]
         public DateTime Geboren { get; set; }
 
 
