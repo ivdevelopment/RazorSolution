@@ -1,0 +1,45 @@
+﻿@model Persoon
+@{
+    ViewData["Title"] = "Toevoegen";
+}
+
+<h2>Persoon toevoegen</h2>
+<form asp-action="Toevoegen" method="post">
+    <label asp-for="ID"></label>
+    <input asp-for="ID" readonly />
+    <div>
+        <label asp-for="Gebruikersnaam"></label>
+        <input asp-for="Gebruikersnaam" />
+        <span asp-validation-for="Gebruikersnaam"></span>
+    </div>
+    <label asp-for="Voornaam"></label>
+    <input asp-for="Voornaam" />
+    <label asp-for="Familienaam"></label>
+    <input asp-for="Familienaam" />
+    <label asp-for="Score"></label>
+    <input asp-for="Score" />
+    <label asp-for="Wedde"></label>
+    <input asp-for="Wedde" />
+    <label asp-for="Paswoord"></label>
+    <input asp-for="Paswoord" />
+    <label asp-for="HerhaalPaswoord">Herhaal paswoord</label>
+    <input asp-for="HerhaalPaswoord" />
+    <label asp-for="Geboren"></label>
+    <input asp-for="Geboren" />
+    <div>
+        <input asp-for="Gehuwd" />
+        <label asp-for="Gehuwd"></label>
+    </div>
+    <label asp-for="Opmerkingen"></label>
+    <textarea asp-for="Opmerkingen"></textarea>
+    @*<label asp-for="Geslacht"></label>
+    <select asp-for="Geslacht"
+    asp-items="@new SelectList(Enum.GetNames(typeof(Geslacht)))">
+    </select>*@
+    @Html.LabelFor(m => m.Geslacht)
+    @Html.EditorFor(m => m.Geslacht)
+    <label asp-for="RekeningNummer">Rekeningnummer</label>
+    <input asp-for="RekeningNummer"/>
+    <input type="submit" value="Toevoegen" />
+    <div asp-validation-summary="All"></div>
+</form>

@@ -18,7 +18,9 @@
                 <th>Gehuwd</th>
                 <th>Opmerkingen</th>
                 <th>Geslacht</th>
+                <th>Rekeningnummer</th>
                 <th>Verwijderen</th>
+                <th>Wijzigen</th>
             </tr>
         </thead>
         <tbody>
@@ -34,14 +36,23 @@
                     <td>@Html.DisplayFor(m => persoon.Gehuwd)</td>
                     <td>@persoon.Opmerkingen</td>
                     <td>@persoon.Geslacht</td>
+                    <td>@persoon.RekeningNummer</td>
                     <td>
                         <a asp-action="VerwijderForm" asp-route-id="@persoon.ID"><img src="~/images/delete.png" alt="delete" /></a>
                     </td>
+                    <td>
+                        <a asp-action="EditForm" method="get" asp-route-id="@persoon.ID">
+                            <img src="~/images/edit.png" alt="edit">
+                        </a>
+                    </td>
+
                 </tr>
             }
         </tbody>
     </table>
-            <a asp-action="Opslag" class="btn btn-primary">Opslag</a>
+            <a asp-action="Opslag" class="btn btn-secondary">Opslag</a>
+            <a asp-action="Toevoegen" class="btn btn-primary">Persoon toevoegen</a>
+
 }
 else{
     <h2>De lijst met personen is leeg</h2>

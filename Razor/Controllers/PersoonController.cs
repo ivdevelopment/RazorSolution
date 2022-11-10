@@ -75,5 +75,56 @@ namespace Razor.Controllers
             }
             return View(nameof(VanTotWedde), vanTotWeddeViewModel);
         }
+
+        [HttpGet]
+        public IActionResult Toevoegen()
+        {
+            var persoon = new Persoon();
+            persoon.Score = 1;  // defaultwaarde voor een score
+            return View(persoon);
+        }
+
+        [HttpPost]
+        public IActionResult Toevoegen(Persoon p)
+        {
+            if (this.ModelState.IsValid)
+            {
+                _persoonService.Add(p);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(p);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult EditForm(int id)
+        {
+            Persoon? persoon = _persoonService.FindByID(id);
+            if (persoon == null)
+                return RedirectToAction(nameof(Index));
+            else
+                return View(persoon);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Persoon p)
+        {
+            if (this.ModelState.IsValid)
+            {
+                _persoonService.Update(p);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(nameof(EditForm), p);
+            }
+        }
+
+        public IActionResult ValideerGebruikersnaam(string gebruikersnaam)
+        {
+            return Json(!_persoonService.Bestaat(gebruikersnaam));
+        }
     }
 }

@@ -1,0 +1,41 @@
+﻿@model Persoon
+@{
+    ViewBag.Title = "Persoonsgegevens wijzigen";
+}
+<h2>Persoonsgegevens wijzigen</h2>
+
+<form asp-action="Edit" method="post">
+    <label asp-for="ID"></label>
+    <input asp-for="ID" readonly />
+    <div>
+        <input asp-for="Gebruikersnaam" type="hidden"/>
+    </div>
+    <label asp-for="Voornaam"></label>
+    <input asp-for="Voornaam" />
+    <label asp-for="Familienaam"></label>
+    <input asp-for="Familienaam" />
+    <label asp-for="Score"></label>
+    <input asp-for="Score" />
+    <label asp-for="Wedde"></label>
+    <input asp-for="Wedde" />
+    <input asp-for="Paswoord" type="hidden"/>
+    <input asp-for="HerhaalPaswoord" type="hidden" />
+    <label asp-for="Geboren"></label>
+    <input asp-for="Geboren" />
+    <div>
+        <input asp-for="Gehuwd" />
+        <label asp-for="Gehuwd"></label>
+    </div>
+    <label asp-for="Opmerkingen"></label>
+    <textarea asp-for="Opmerkingen"></textarea>
+    @*<label asp-for="Geslacht"></label>
+    <select asp-for="Geslacht"
+    asp-items="@new SelectList(Enum.GetNames(typeof(Geslacht)))">
+    </select>*@
+    @Html.LabelFor(m => m.Geslacht)
+    @Html.EditorFor(m => m.Geslacht)
+    <label asp-for="RekeningNummer"></label>
+<input asp-for="RekeningNummer"/>
+    <input type="submit" value="Wijzigen" />
+    <div asp-validation-summary="All"></div>
+</form>
